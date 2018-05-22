@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon May 21 17:47:42 CEST 2018:
+Avvio della versione di Derby The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): istanza a816c00e-0163-8362-86a7-000008010ad0
+sulla directory di database C:\Users\Federico Pallaver\Desktop\ciao con caricatore classi java.net.URLClassLoader@7a972872 
+Caricato da file:D:/db-derby-10.12.1.1-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_162-b12
+user.dir=C:\Users\Federico Pallaver\Desktop\ProgettoAdaptive
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Programma di caricamento classe database avviato - derby.database.classpath=''
