@@ -21,11 +21,6 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>com.github.dhorions</groupId>
-            <artifactId>boxable</artifactId>
-            <version>1.5</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>10.14.1.0</version>

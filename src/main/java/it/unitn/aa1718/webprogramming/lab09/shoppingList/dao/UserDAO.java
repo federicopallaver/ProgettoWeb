@@ -43,4 +43,6 @@ public interface UserDAO extends DAO<User, Integer> {
      * @since 1.0.180421
      */
     public User update(User user) throws DAOException;
+
+    public Boolean insert(Long id, String email, String password, String name, String lastname, Boolean admin, String avatarPath) throws DAOException;
 }

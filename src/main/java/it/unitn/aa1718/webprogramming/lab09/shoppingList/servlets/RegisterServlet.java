@@ -1,9 +1,3 @@
-/*
- * AA 2017-2018
- * Introduction to Web Programming
- * Lab 09 - ShoppingList List
- * UniTN
- */
 package it.unitn.aa1718.webprogramming.lab09.shoppingList.servlets;
 
 import it.unitn.aa1718.webprogramming.lab09.shoppingList.dao.UserDAO;
@@ -23,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Stefano Chirico &lt;stefano dot chirico at unitn dot it&gt;
  * @since 2018.04.21
  */
-public class LoginServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     private UserDAO userDao;
 
@@ -48,23 +42,34 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      *
-     * @author Stefano Chirico
-     * @since 1.0.180421
+     * @author Federico Pallaver
+     *
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   
-        String email = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        String contextPath = getServletContext().getContextPath();
-        if (!contextPath.endsWith("/")) {
-            contextPath += "/";
-        }
-
+            
         try {
-            User user = userDao.getByEmailAndPassword(email, password);
-            if (user == null) {
+            Long id = userDao.getCount() + 1;
+            String email = request.getParameter("username");
+            String password = request.getParameter("password");
+            String name = request.getParameter("name");
+            String lastname = request.getParameter("lastname");
+            Boolean isAdmin = false;
+            String avatarPath = "default-path";
+
+            String contextPath = getServletContext().getContextPath();
+            if (!contextPath.endsWith("/")) {
+                contextPath += "/";
+            }
+            
+            Boolean registered = userDao.insert(id, email, password, name, lastname, isAdmin, avatarPath);
+            if(registered == true){
+                //se l'inserimento è risultato corretto dovremmo rimandarlo alla pagina di login
+            }
+           
+            
+            
+            /* if (user == null) {
                 request.getServletContext().log("\n\n\nUser = NULL\n\n\n");
                 response.sendRedirect(response.encodeRedirectURL(contextPath + "login.html"));
             } else {
@@ -77,7 +82,9 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect(response.encodeRedirectURL(contextPath + "restricted/shopping.lists.html?id=" + user.getId()));
                 }
             }
-        } catch (DAOException ex) {
+        } */ }
+           catch (DAOException ex) {
+                
             request.getServletContext().log("Impossible to retrieve the user", ex);
         }
     }

@@ -93,22 +93,28 @@
                                                         Sign up
                                                     </div>
                                                     <div class="card-body">
-                                                        <form method="POST" action="REGISTRATIOSERVELT">  <!--metti registration servlet-->
+                                                        <form method="POST" action="RegisterServlet">  <!--metti registration servlet-->
+                                                            <div class="form-group">                   
+                                                                <input type="text" class="form-control" name="name" placeholder="Name" autofocus required>
+                                                            </div>
+                                                            <div class="form-group">                   
+                                                                <input type="text" class="form-control" name="lastname" placeholder="Lastname" autofocus required>
+                                                            </div>    
                                                             <div class="form-group">
-                                                                <input type="email" class="form-control" name="email" placeholder="Enteremail@aaa.com" autofocus>                  
+                                                                <input type="email" class="form-control" name="email" placeholder="Enteremail@aaa.com" autofocus required>                  
                                                             </div>
                                                             <div class="form-group">                   
                                                                 <input type="password" class="form-control" name="password" placeholder="Password" autofocus required>
                                                             </div>
                                                             <div class="form-group">                   
-                                                                <p><input type="radio" name="privacy_accepted">&nbsp;Ho letto ed accetto l'informativa sulla privacy</p>
+                                                                <p><input type="radio" name="privacy_accepted" required>&nbsp;Ho letto ed accetto l'informativa sulla privacy</p>
                                                             </div>
-                                                            <button type="button" class="btn btn-success">Registrami</button><span>
+                                                            <button type="submit" class="btn btn-success">Registrami</button><span>
                                                         </form>
                                                         <a class="btn btn-danger" href="login.html" role="button">Annulla</a>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>

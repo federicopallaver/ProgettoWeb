@@ -75,6 +75,11 @@
         <servlet-name>PDFServlet</servlet-name>
         <servlet-class>it.unitn.aa1718.webprogramming.lab09.shoppingList.servlets.PDFServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>it.unitn.aa1718.webprogramming.lab09.shoppingList.servlets.RegisterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login.handler</url-pattern>
@@ -103,13 +108,17 @@
         <servlet-name>PDFServlet</servlet-name>
         <url-pattern>/restricted/export2PDF</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/Landing_Page.html</welcome-file>
+        <welcome-file>/login.html</welcome-file>
     </welcome-file-list>
     <error-page>
         <location>/ooops.jsp</location>

@@ -252,4 +252,25 @@ public class JDBCUserDAO extends JDBCDAO<User, Integer> implements UserDAO {
             throw new DAOException("Impossible to update the user", ex);
         }
     }
+    
+    public Boolean insert(Long  id, String email, String password, String name, String lastname, Boolean isAdmin, String avatarPath) throws DAOException {
+        
+        try (PreparedStatement std = CON.prepareStatement("INSERT INTO USERS VALUES id = ?, email = ?, password = ?, name = ?, lastname = ?, isAdmin = ?, avatarPath = ?")) {
+            std.setLong(1, id);
+            std.setString(2, email);
+            std.setString(3, password);
+            std.setString(4, name);
+            std.setString(5, lastname);
+            std.setBoolean(6, false);
+            std.setString(7, avatarPath);
+            
+            if (std.executeUpdate() == 1) {
+                return true;
+            } else {
+                throw new DAOException("Impossible to insert the user");
+            }
+        } catch (SQLException ex) {
+            throw new DAOException("Impossible to insert the user", ex);
+        }
+    }
 }
