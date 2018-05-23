@@ -58,7 +58,10 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Nuova lista della spesa</h5>
                                     <p class="card-text">Aggiungi una nuova lista della spesa. Provvederemo noi a salvarla.</p>
-                                    <a href="#" class="btn btn-outline-primary">Aggiungi</a>
+                                    <form method="POST" action="ShoppingListsServlet">
+                                        <button type="submit" class="btn btn-outline-primary">Aggiungi</button> 
+                                    </form>
+                                       
                                 </div>
                             </div>
                         </div>

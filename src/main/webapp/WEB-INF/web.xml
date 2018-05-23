@@ -4,7 +4,7 @@
     <display-name>ShoppingList</display-name>
     <context-param>
         <param-name>dburl</param-name>
-        <param-value>jdbc:derby:C:\Users\Federico Pallaver\Desktop\Progetto-Web\db</param-value>
+        <param-value>jdbc:derby:C:\Users\Federico Pallaver\Desktop\ProgettoWeb\db</param-value>
     </context-param>
     <context-param>
         <description>The path where the user avatar images are stored.</description>

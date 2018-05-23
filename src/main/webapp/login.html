@@ -1,42 +1,122 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <title>Login</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Per le icone di utente e password. -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
     </head>
-    <body>
-        <div class="card mx-auto" style="width: 25rem;">   
-            <div class="card-header bg-primary text-center">
-                Sign in
-            </div>
-            <div class="card-body">
-                <form method="POST" action="login.handler">  <!--metti login servlet-->
-                    <div class="form-group">
-                        <input type="email" class="form-control" name="username" placeholder="Enteremail@aaa.com" autofocus>                  
+    <body class="bg-info">
+        <div class="container">
+
+            <nav class="navbar navbar-expand-md bg-light rounded navbar-light mt-5">
+                <!-- Brand -->
+                <a class="navbar-brand" href="#">Shopping List</a>
+
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar links -->
+                <form class="collapse navbar-collapse" id="collapsibleNavbar" method="POST" action="login.handler"> 
+
+                    <div class="mr-auto">                      
                     </div>
-                    <div class="form-group">                   
-                        <input type="password" class="form-control" name="password" placeholder="Password" autofocus required>
-                        <small><a href="Recupero_Password.html"><u>Password dimenticata?</u></a></small>
+
+
+                    <div class="col-auto"> <!-- Osservazione: pl-2 == "padding left-2", pr-3 == "padding right-3 -->
+                        <div class="input-group"> <!-- Input group si usa per mettere alla sinistra della "fascetta" di inserimento un add-on o bottone -->
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-user"></i></div>
+                            </div>
+                            <input type="email" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                        </div>
                     </div>
-                    <div class="form-group">                   
-                        <p><input type="radio" name="remember_me">&nbsp;Ricordami</p>
+
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                            </div>
+                            <input type="password" class="form-control" name="password" id="inlineFormInputGroup" placeholder="Password">
+                        </div>
                     </div>
-                    <input type="submit" class="btn btn-success" value="Accedi"><span>
-                </form>
-                <a class="btn btn-danger" href="Landing_Page.html" role="button">Annulla</a></span>
-                <br><br><a class="pull-right" href="Registrazione.html"><u>Non hai un account?</u></a>
+                    <div class="col-auto">
+                        <a href="Recupero_password.html"> Password dimenticata? </a>
+                    </div>
+
+                    <div class="col-auto"> <!--  pl-0 pr-0 -->
+                        <button class="btn btn-primary" type="submit">Login</button> <!-- my-2 my-sm-0 -->
+                    </div> 
+                </form> 
+            </nav>
+            <br>
+            <div class="container">
+
+                <div class="row">  
+                    <div class="col-sm">
+                        <div class="card" style="width: 20rem;">
+                            <img class="card-img-top" src="http://www.radiosubasio.it/wp-content/uploads/2013/09/LISTA-SPESA-OK.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Nuova lista della spesa</h5>
+                                <p class="card-text">Aggiungi una nuova lista della spesa. Per condividerla, dovrai successivamente un account.</p>
+                                <a href="#" class="btn btn-outline-primary">Aggiungi</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card" style="width: 20rem;">
+                            <img class="card-img-top" src="https://www.timeshighereducation.com/sites/default/files/byline_photos/default-avatar.png" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Registrazione</h5>
+                                <p class="card-text">Crea un tuo account presso il nostro sito web. Non dimenticherai più le liste della spesa.</p>
+                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#registrazione">
+                                    Registrati
+                                </button>
+                                <!-- Modale del pulsante di registrazione -->
+                                <div class="modal fade" id="registrazione" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">Registrazione</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="card mx-auto" style="width: 25rem;">   
+                                                    <div class="card-header bg-primary text-center">
+                                                        Sign up
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <form method="POST" action="REGISTRATIOSERVELT">  <!--metti registration servlet-->
+                                                            <div class="form-group">
+                                                                <input type="email" class="form-control" name="email" placeholder="Enteremail@aaa.com" autofocus>                  
+                                                            </div>
+                                                            <div class="form-group">                   
+                                                                <input type="password" class="form-control" name="password" placeholder="Password" autofocus required>
+                                                            </div>
+                                                            <div class="form-group">                   
+                                                                <p><input type="radio" name="privacy_accepted">&nbsp;Ho letto ed accetto l'informativa sulla privacy</p>
+                                                            </div>
+                                                            <button type="button" class="btn btn-success">Registrami</button><span>
+                                                        </form>
+                                                        <a class="btn btn-danger" href="login.html" role="button">Annulla</a>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-footer bg-default">
-                @Copyright blablabla
-            </div>
-        </div>
     </body>
 </html>
