@@ -15,124 +15,120 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:catch var="ex">
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Lab 09: Shopping lists shared with${user.firstName} ${user.lastName}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/floating-labels.css">
-        <link rel="stylesheet" href="css/forms.css">
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="card border-primary">
-                <div class="card-header bg-primary text-white">
-                    <h1>Benvenuto, qui puoi gestire le tue liste della spesa</h1>
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Lista della spesa</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" crossorigin="anonymous">
+            <link rel="stylesheet" href="css/floating-labels.css">
+            <link rel="stylesheet" href="css/forms.css">
+        </head>
+        <body class="bg-info">
+            <!-- Altrimenti, container-fluid -->
+            <div class="container">
+                <div class="card border-primary">
+                    <div class="card-header bg-success text-white">
+                        <h1>Ciao ${user.firstName}, cosa vuoi fare oggi?
+                            <c:choose>
+                                <c:when test="${sessionScope.user.email eq 'stefano.chirico@unitn.it'}">
+                                    <a class="float-right" href="users.html"><button type="button" class="btn btn-primary btn-sm">Go to Users List</button></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="float-right" href="logout.handler"><button type="button" class="btn btn-primary btn-sm">Logout</button></a>
+                                </c:otherwise>
+                            </c:choose>
+                        </h1>
+                    </div>
                 </div>
                 <div class="card-body">
-                    The following table lists all the shopping-lists shared with &quot;${user.firstName} ${user.lastName}&quot;.<br>
+                    <h2>Qui puoi gestire le tue liste della spesa.</h2>
+                    <h3>Creane una nuova o modificane una esistente.</h3>
                 </div>
 
-                <!-- Shopping Lists cards -->
-                <div id="accordion">
-                    <c:choose>
-                        <c:when test="${empty shoppingLists}">
-                    <div class="card">
-                        <div class="card-body">
-                            <button type="button" class="btn btn-outline-light bg-light text-primary btn-sm mx-auto" data-toggle="modal" data-target="#editDialog">Non hai liste, creane una</i></button>
-                        </div>
-                    </div>
-                        </c:when>
-                        <c:otherwise>
-                    <%
-                        int index = 1;
-                    %>
-                    <c:forEach var="shoppingList" items="${shoppingLists}">
-                    <div class="card">
-                        <div class="card-header" id="heading<%=index%>">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="true" aria-controls="collapse${index}">
-                                    ${shoppingList.name}
-                                </button>
-                                    <div class="float-right"><a href="<c:url context="${contextPath}" value="/restricted/edit.shopping.list.html?id=${shoppingList.id}" />" class="fas fa-pen-square" title="edit &quot;${shoppingList.name}&quot; shopping list" data-toggle="modal" data-target="#editDialog" data-shopping-list-id="${shoppingList.id}" data-shopping-list-name="${shoppingList.name}" data-shopping-list-description="${shoppingList.description}"></a></div>
-                            </h5>
-                        </div>
-                        <div id="collapse${index}" class="collapse<%=(index == 1 ? " show" : "")%>" aria-labelledby="heading<%=(index++)%>" data-parent="#accordion">
-                            <div class="card-body">
-                                ${shoppingList.description}
+                <div class="container">
+                    <div class="row">  
+                        <!-- Prima colonna del grid. Contiene il box per aggiungere una nuova lista della spesa. -->
+                        <div class="col-sm">
+                            <div class="card" style="width: 20rem;">
+                                <img class="card-img-top" src="http://www.radiosubasio.it/wp-content/uploads/2013/09/LISTA-SPESA-OK.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nuova lista della spesa</h5>
+                                    <p class="card-text">Aggiungi una nuova lista della spesa. Provvederemo noi a salvarla.</p>
+                                    <a href="#" class="btn btn-outline-primary">Aggiungi</a>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-sm">
+                            <!-- Seconda colonna del grid. Conterrà l'accordion, che visualizza tutte le liste della spesa di un utente. -->
+                            <div id="accordion">
+                                <c:choose>
+                                    <c:when test="${empty shoppingLists}">
+                                        <div class="card" style="width: 22rem;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Inventario vuoto</h5>
+                                                <p class="card-text">Non hai ancora nessuna lista della spesa.<br>Aggiungine una per visualizzarla nell'elenco.</p>
+                                            </div>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <%
+                                            int index = 1;
+                                        %>
+                                        <c:forEach var="shoppingList" items="${shoppingLists}">
+                                            <div class="card">
+                                                <div class="card-header" id="heading<%=index%>">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="true" aria-controls="collapse${index}">
+                                                            ${shoppingList.name}
+                                                        </button>
+                                                        <div class="float-right"><a href="<c:url context="${contextPath}" value="/restricted/edit.shopping.list.html?id=${shoppingList.id}" />" class="fas fa-pen-square" title="edit &quot;${shoppingList.name}&quot; shopping list" data-toggle="modal" data-target="#editDialog" data-shopping-list-id="${shoppingList.id}" data-shopping-list-name="${shoppingList.name}" data-shopping-list-description="${shoppingList.description}"></a></div>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapse${index}" class="collapse<%=(index == 1 ? " show" : "")%>" aria-labelledby="heading<%=(index++)%>" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        ${shoppingList.description}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div> 
+                        </div>
                     </div>
-                    </c:forEach>
-                    </c:otherwise>
-                    </c:choose>
-                </div>                    
-                <div class="card-footer"><span class="float-left">Copyright bbbb</span>
-                    <c:choose>
-                        <c:when test="${sessionScope.user.email eq 'stefano.chirico@unitn.it'}">
-                    <a class="float-right" href="users.html"><button type="button" class="btn btn-primary btn-sm">Go to Users List</button></a>
-                        </c:when>
-                        <c:otherwise>
-                    <a class="float-right" href="logout.handler"><button type="button" class="btn btn-primary btn-sm">Logout</button></a>
-                        </c:otherwise>
-                    </c:choose>
                 </div>
             </div>
-        </div>
-        <!-- create/edit shopping list modal dialog (#editDialog) -->
-        <form action="shopping.lists.handler" method="POST">
-            <div class="modal fade" id="editDialog" tabindex="-1" role="dialog" aria-labelledby="titleLabel">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">            
-                            Categorie disponibili                 
-                        </div>
-                        <div class="modal-body">
-                            <ul>
-                                <li><a href="ServletPerMostrareProdotti"><u>Supermercato</u></a></li>
-                                <li><a href="ServletPerMostrareProdotti"><u>Farmacia</u></a></li></li>
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" id="editDialogSubmit">Create</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            $(function () {
-                $("#editDialog").on("show.bs.modal", function (e) {
-                    var target = $(e.relatedTarget);
-                    var shoppingListId = target.data("shopping-list-id");
-                    if (shoppingListId !== undefined) {
-                        var shoppingListName = target.data("shopping-list-name");
-                        var shoppingListDescription = target.data("shopping-list-description");
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $("#editDialog").on("show.bs.modal", function (e) {
+                        var target = $(e.relatedTarget);
+                        var shoppingListId = target.data("shopping-list-id");
+                        if (shoppingListId !== undefined) {
+                            var shoppingListName = target.data("shopping-list-name");
+                            var shoppingListDescription = target.data("shopping-list-description");
 
-                        $("#titleLabel").html("Edit Shopping List (" + shoppingListId + ")");
-                        $("#editDialogSubmit").html("Update");
-                        $("#idShoppingList").val(shoppingListId);
-                        $("#name").val(shoppingListName);
-                        $("#description").val(shoppingListDescription);
-                    } else {
-                        $("#titleLabel").html("Create new Shopping List");
-                        $("#editDialogSubmit").html("Create");
-                    }
+                            $("#titleLabel").html("Edit Shopping List (" + shoppingListId + ")");
+                            $("#editDialogSubmit").html("Update");
+                            $("#idShoppingList").val(shoppingListId);
+                            $("#name").val(shoppingListName);
+                            $("#description").val(shoppingListDescription);
+                        } else {
+                            $("#titleLabel").html("Create new Shopping List");
+                            $("#editDialogSubmit").html("Create");
+                        }
+                    });
                 });
-            });
-        </script>
-
-    </body>
-</html>
+            </script>
+        </body>
+    </html>
 </c:catch>
 <c:if test="${not empty ex}">
     <jsp:scriptlet>
